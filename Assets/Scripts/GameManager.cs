@@ -72,15 +72,14 @@ public class GameManager : MonoBehaviour
 
         lastSelectedTile = null;
         timeLeft = gameDurationInSeconds;
+        TimeLeftChanged?.Invoke(this, timeLeft);
 
-        if (countdownTimer == null)
-        {
-            countdownTimer = CountdownTimer();
-        }
-        else
+        if (countdownTimer != null)
         {
             StopCoroutine(countdownTimer);
         }
+
+        countdownTimer = CountdownTimer();
         StartCoroutine(countdownTimer);
     }
 
@@ -88,6 +87,7 @@ public class GameManager : MonoBehaviour
     {
         //Resume Timer
         StopCoroutine(countdownTimer);
+        countdownTimer = CountdownTimer();
         StartCoroutine(countdownTimer);
         //Turn on other panels
         gameplayCanvas.enabled = true;
