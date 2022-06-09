@@ -9,6 +9,7 @@ public class Tile : MonoBehaviour
 
     [SerializeField] List<Material> tileTypeMaterial; //already in the same order as the enum
     [SerializeField] BoxCollider boxCollider;
+    [SerializeField] AnimationCurve animationCurve;
     IEnumerator spinAndShrink;
     Renderer[] quadRenderers;
 
@@ -50,7 +51,7 @@ public class Tile : MonoBehaviour
         StopCoroutine(spinAndShrink);
         spinAndShrink = SpinAndShrink();
         StartCoroutine(spinAndShrink);
-        Debug.Log($"Self Disabling from {this.name}");
+        //Debug.Log($"Self Disabling from {this.name}");
     }
 
     IEnumerator SpinAndShrink()
@@ -65,13 +66,13 @@ public class Tile : MonoBehaviour
         {
             t += Time.deltaTime;
             transform.localScale = Vector3.zero;
-            float progress = t / duration;
+            float progress = animationCurve.Evaluate( t / duration);
 
-            float yRotation = Mathf.Lerp(startRotation, endRotation, progress) % 360.0f;
+            float yRotation = Mathf.LerpUnclamped(startRotation, endRotation, progress) % 360.0f;
             transform.localScale = new Vector3(
-                Mathf.Lerp(initialScale.x, 0, progress),
-                Mathf.Lerp(initialScale.y, 0, progress),
-                Mathf.Lerp(initialScale.z, 0, progress));
+                Mathf.LerpUnclamped(initialScale.x, 0, progress),
+                Mathf.LerpUnclamped(initialScale.y, 0, progress),
+                Mathf.LerpUnclamped(initialScale.z, 0, progress));
 
             transform.eulerAngles = new Vector3(
                 transform.eulerAngles.x,

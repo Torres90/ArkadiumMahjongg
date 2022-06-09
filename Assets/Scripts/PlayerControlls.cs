@@ -37,8 +37,8 @@ public class PlayerControlls : MonoBehaviour
         Transform objHit = RaycastToObject(mousePosition);
         if (objHit != null)
         {
-            Debug.Log(objHit.name);
-            Debug.Log(objHit.GetComponent<Tile>().tileType.ToString());
+            //Debug.Log(objHit.name);
+            //Debug.Log(objHit.GetComponent<Tile>().tileType.ToString());
             ClickedOnTile?.Invoke(this, objHit);
         }
     }

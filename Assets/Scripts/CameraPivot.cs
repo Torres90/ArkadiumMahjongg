@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraPivot : MonoBehaviour
 {
     [SerializeField] private float boardSwipeRotationDuration;
+    [SerializeField] private AnimationCurve animationCurve;
     private bool cameraIsRotating;
 
     private void OnEnable()
@@ -42,7 +43,7 @@ public class CameraPivot : MonoBehaviour
         while (t < boardSwipeRotationDuration)
         {
             t += Time.deltaTime;
-            float yRotation = Mathf.Lerp(startRotation, endRotation, t / boardSwipeRotationDuration) % 360.0f;
+            float yRotation = Mathf.Lerp(startRotation, endRotation, animationCurve.Evaluate(t / boardSwipeRotationDuration)) % 360.0f;
             transform.eulerAngles = new Vector3(
                 transform.eulerAngles.x,
                 yRotation,

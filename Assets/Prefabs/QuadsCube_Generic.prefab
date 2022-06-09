@@ -323,6 +323,39 @@ MonoBehaviour:
   - {fileID: 2100000, guid: fc9634950dcdd8243ac6c40d19e556cb, type: 2}
   - {fileID: 2100000, guid: 48f70ac398670b64a8e3519ae0a1b31b, type: 2}
   boxCollider: {fileID: 5734115259227885986}
+  animationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.5003537
+      value: -0.13774174
+      inSlope: 0.5506974
+      outSlope: 0.5506974
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &5870861620663710723
 GameObject:
   m_ObjectHideFlags: 0
