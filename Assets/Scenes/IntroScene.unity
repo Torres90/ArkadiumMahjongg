@@ -907,13 +907,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boardSize: {x: 4, y: 4, z: 4}
   gapBetweenCubes: 0.1
-  cubeTypes:
-  - {fileID: 5061516751299721507, guid: b6a6d070d05717a44ae2ce9ee004f758, type: 3}
-  - {fileID: 192304286856391105, guid: 254ae211fc34c6b4cba4fe86fc988d2f, type: 3}
-  - {fileID: 1347320784270004768, guid: e7469493b34094947b37dca5c6610f3c, type: 3}
-  - {fileID: 5810556662865096870, guid: 93cb8b19b7fab604abbddbdd69c80fe2, type: 3}
-  - {fileID: 780905340373131046, guid: f4ccdbca4c8901548bfedba3a3238064, type: 3}
-  - {fileID: 8958206521774963044, guid: 741f131c2589c1d478768b267ba2cbeb, type: 3}
+  tileSpawner: {fileID: 0}
 --- !u!4 &975104067
 Transform:
   m_ObjectHideFlags: 0
@@ -1056,9 +1050,9 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.57254905, g: 0.9529412, b: 0.8265922, a: 1}
-    m_PressedColor: {r: 0.09411766, g: 0.22745098, b: 0.20245308, a: 1}
+    m_NormalColor: {r: 0.90196085, g: 0.90196085, b: 0.90196085, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_PressedColor: {r: 0.69411767, g: 0.69411767, b: 0.69411767, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -1111,7 +1105,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 0d4ad782dee8a7f4ab464254e3f7fabf, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
