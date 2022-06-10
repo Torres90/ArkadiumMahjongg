@@ -1,3 +1,4 @@
+using CustomHelperFunctions;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,12 +12,12 @@ public class UISelectedTileType : MonoBehaviour
 
     private void OnEnable()
     {
-        GameManager.ClickedOnAFreeTile += OnPlayerClickedOnAFreeTile;
+        Board.ClickedOnAFreeTile += OnPlayerClickedOnAFreeTile;
         GameManager.PlayerFoundTilePair += OnPlayerFoundTilePair;
     }
     private void OnDisable()
     {
-        GameManager.ClickedOnAFreeTile -= OnPlayerClickedOnAFreeTile;
+        Board.ClickedOnAFreeTile -= OnPlayerClickedOnAFreeTile;
         GameManager.PlayerFoundTilePair -= OnPlayerFoundTilePair;
     }
     private void Start()

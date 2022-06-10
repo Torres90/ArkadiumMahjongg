@@ -1,10 +1,12 @@
+using CustomHelperFunctions;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Board : MonoBehaviour
 {
-    public static EventHandler<Tile> ClickedOnFreeTile;
+    public static EventHandler<Tile> ClickedOnAFreeTile;
+    public static EventHandler ClickedOnAStuckTile;
     public static EventHandler BoardCleared;
 
     [SerializeField] private Vector3Int boardSize;
@@ -141,8 +143,17 @@ public class Board : MonoBehaviour
 
     private void OnClickedOnTile(object sender, Transform clickedTrans)
     {
-        if (GetTileFromTransform(clickedTrans, out var clickedTile) && IsTileFree(clickedTile))
-            ClickedOnFreeTile?.Invoke(this, clickedTile);
+        if (GetTileFromTransform(clickedTrans, out var clickedTile))
+        {
+            if (IsTileFree(clickedTile))
+            {
+                ClickedOnAFreeTile?.Invoke(this, clickedTile);
+            }
+            else
+            {
+                ClickedOnAStuckTile?.Invoke(this, EventArgs.Empty);
+            }
+        }            
     }
 
     private bool GetTileFromTransform(Transform clickedTileTrans, out Tile tile)

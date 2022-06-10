@@ -6,7 +6,6 @@ public class GameManager : MonoBehaviour
 {
     //Events
     public static EventHandler<(Tile, Tile)> PlayerFoundTilePair;
-    public static EventHandler<Tile> ClickedOnAFreeTile;
     public static EventHandler<int> TimeLeftChanged;
     public static EventHandler<int> ScoreChanged;
     public static EventHandler<int> MultiplierChanged;
@@ -34,7 +33,7 @@ public class GameManager : MonoBehaviour
     private void OnEnable()
     {
         //Subscribing to Events
-        Board.ClickedOnFreeTile += OnClickedOnFreeTile;
+        Board.ClickedOnAFreeTile += OnClickedOnFreeTile;
         Board.BoardCleared += OnBoardCleared;
         PauseButton.PauseButtonWasPressed += OnPause;
         ResumeButton.ResumeButtonWasPressed += OnResume;
@@ -43,7 +42,7 @@ public class GameManager : MonoBehaviour
     private void OnDisable()
     {
         //Unsubscribing to Events
-        Board.ClickedOnFreeTile -= OnClickedOnFreeTile;
+        Board.ClickedOnAFreeTile -= OnClickedOnFreeTile;
         Board.BoardCleared -= OnBoardCleared;
         PauseButton.PauseButtonWasPressed -= OnPause;
         ResumeButton.ResumeButtonWasPressed -= OnResume;
@@ -121,8 +120,6 @@ public class GameManager : MonoBehaviour
         //First tile you click gets stored
         //If you click on a stuck tile, nothing happens. The stored tile doesn't change.
         //If you click on a free tile but of a different type, this new tile gets stored and the last one is forgotten.
-
-        ClickedOnAFreeTile?.Invoke(this, clickedTile);
 
         if (lastSelectedTile == null)
         {
