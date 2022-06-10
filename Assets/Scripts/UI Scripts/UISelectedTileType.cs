@@ -7,6 +7,7 @@ public class UISelectedTileType : MonoBehaviour
 {
     [SerializeField] private List<Texture> tileTypesImages;
     [SerializeField] private RawImage image;
+    private Texture2D oneTransparentPixel;
 
     private void OnEnable()
     {
@@ -20,10 +21,12 @@ public class UISelectedTileType : MonoBehaviour
     }
     private void Start()
     {
-        UpdateSelectedTileTypeUI(TileType.Panda);
+        oneTransparentPixel = UnityHelperFunctions.OneTransparentPixel();
+        ResetImage();
     }
+
     void OnPlayerFoundTilePair(object sender, (Tile, Tile) e) => ResetImage();
     void OnPlayerClickedOnAFreeTile(object sender, Tile tileClicked) => UpdateSelectedTileTypeUI(tileClicked.tileType);
-    void ResetImage() => image.texture = null; //Ideally, with more time and polish, something else would go here
+    void ResetImage() => image.texture = oneTransparentPixel; //Ideally, with more time and polish, something else would go here
     void UpdateSelectedTileTypeUI(TileType type) => image.texture = tileTypesImages[(int)type]; //The list is already in the same order as the TileType enum
 }

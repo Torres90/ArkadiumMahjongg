@@ -102,7 +102,7 @@ public class Board : MonoBehaviour
             }
         }
 
-        boardList = Shuffle(boardList);
+        boardList = UnityHelperFunctions.Shuffle(boardList);
         int numberOfTileTypes = Enum.GetNames(typeof(TileType)).Length;
         int currentBoardIndex = 0;
         for (int i = 0; i < tileRepetitions; i++)
@@ -194,27 +194,5 @@ public class Board : MonoBehaviour
             }
         }
         return true;
-    }
-
-    public static List<T> Shuffle<T>(List<T> list)
-    {
-        //take any list of GameObjects and return it with Fischer-Yates shuffle
-        int i = 0;
-        int t = list.Count;
-        int r;
-        T p;
-        List<T> tempList = new();
-        tempList.AddRange(list);
-
-        while (i < t)
-        {
-            r = UnityEngine.Random.Range(i, tempList.Count);
-            p = tempList[i];
-            tempList[i] = tempList[r];
-            tempList[r] = p;
-            i++;
-        }
-
-        return tempList;
-    }
+    }    
 }
