@@ -1,9 +1,10 @@
+using CustomHelperFunctions;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Pool;
 
-public class AudioManager : MonoBehaviour
+
+public class AudioManager : SingletonMonoBehaviour<AudioManager>
 {
     [SerializeField] List<AudioClip> audioClipsList;
     List<AudioSource> audioSourcePool;
@@ -59,7 +60,7 @@ public class AudioManager : MonoBehaviour
         sourceToUse.Play();
     }
 
-    
+
 
     private void InitializeAudioSourcePool()
     {
