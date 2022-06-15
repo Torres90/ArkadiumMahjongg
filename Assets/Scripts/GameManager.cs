@@ -11,9 +11,11 @@ public class GameManager : MonoBehaviour
     public static EventHandler<int> ScoreChanged;
     public static EventHandler<int> MultiplierChanged;
     public static EventHandler TimeOutGameOver;
+    public static EventHandler Victory;
 
     //[Header("UI Variables")]
     //[SerializeField] private Canvas gameplayCanvas;
+
     //[SerializeField] private Canvas gamePausedCanvas;
     //[SerializeField] private Canvas gameOverCanvas;
     //[SerializeField] private Canvas gameWonCanvas;
@@ -131,11 +133,12 @@ public class GameManager : MonoBehaviour
         {
             //gameWonCanvas.enabled = true;
             SwitchCanvas?.Invoke(this, "Canvas - Victory");
-
+            Victory?.Invoke(this, EventArgs.Empty);
         }
         else
         {
             //gameOverCanvas.enabled = true;
+            //CountdownTimer() will invoke TimeOutGameOver.
             SwitchCanvas?.Invoke(this, "Canvas - GameOver");
         }
     }

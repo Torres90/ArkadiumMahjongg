@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7356827207086727229}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -50,3 +50,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f2e452eb4d6d3a7479d369931e555ed0, type: 3}
   - {fileID: 8300000, guid: c4abf6ff8bf03df44a4cc9880740efe3, type: 3}
   - {fileID: 8300000, guid: 2b908a2103b3b0b408ca2f7532495222, type: 3}
+  - {fileID: 8300000, guid: 8756dc89ffa5ff64c9d4ff311341d868, type: 3}
+  - {fileID: 8300000, guid: 63e07f865801be747927b8e696077119, type: 3}
+  - {fileID: 8300000, guid: 8b8cf648536512f4ebb6dfb21444a90b, type: 3}
+  - {fileID: 8300000, guid: abe5ad40806ecdc428f356c66ec26221, type: 3}
+  - {fileID: 8300000, guid: 475a7200f8440134997be7ffe21c53b0, type: 3}
+  musicVolume: 0.5

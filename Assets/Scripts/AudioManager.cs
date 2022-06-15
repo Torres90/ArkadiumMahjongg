@@ -8,23 +8,28 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
 {
     [SerializeField] List<AudioClip> audioClipsList;
     List<AudioSource> audioSourcePool;
-    int audioSourcePoolPreloadAmout = 5;
+    readonly int audioSourcePoolPreloadAmout = 5;
     AudioSource audioSourcePlayingLoopingMusic;
+    [Range(0,1)]
+    [SerializeField] float musicVolume;
 
     private void Start()
     {
         InitializeAudioSourcePool();
-        PlayLoopingMusic("Run For It");
+        PlayLoopingMusic("Intro - Run For It");
     }
 
     private void OnEnable()
     {
         GameManager.PlayerFoundTilePair += OnPlayerFoundTilePair;
+        GameManager.Victory += OnVictory;
+        GameManager.TimeOutGameOver += OnTimeOutGameOver;
         Board.ClickedOnAStuckTile += OnClickedOnAStuckTile;
         Board.ClickedOnAFreeTile += OnClickedOnAFreeTile;
         PauseButton.PauseButtonWasPressed += OnButtonWasClicked;
         PauseButton.PauseButtonWasPressed += OnPauseButtonWasClicked;
         RestartGameButton.RestartGameButtonPressed += OnButtonWasClicked;
+        RestartGameButton.RestartGameButtonPressed += OnRestartGame;
         ResumeButton.ResumeButtonWasPressed += OnButtonWasClicked;
         ResumeButton.ResumeButtonWasPressed += OnResumeButtonWasClicked;
         PlayerControlls.SwippedRightToLeft += OnSpinCamera;
@@ -34,25 +39,30 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
     private void OnDisable()
     {
         GameManager.PlayerFoundTilePair -= OnPlayerFoundTilePair;
+        GameManager.Victory -= OnVictory;
+        GameManager.TimeOutGameOver -= OnTimeOutGameOver;
         Board.ClickedOnAStuckTile -= OnClickedOnAStuckTile;
         Board.ClickedOnAFreeTile -= OnClickedOnAFreeTile;
         PauseButton.PauseButtonWasPressed -= OnButtonWasClicked;
-        PauseButton.PauseButtonWasPressed += OnPauseButtonWasClicked;
+        PauseButton.PauseButtonWasPressed -= OnPauseButtonWasClicked;
         RestartGameButton.RestartGameButtonPressed -= OnButtonWasClicked;
+        RestartGameButton.RestartGameButtonPressed -= OnRestartGame;
         ResumeButton.ResumeButtonWasPressed -= OnButtonWasClicked;
         ResumeButton.ResumeButtonWasPressed -= OnResumeButtonWasClicked;
         PlayerControlls.SwippedRightToLeft -= OnSpinCamera;
         PlayerControlls.SwippedLeftToRight -= OnSpinCamera;
         StartGameButton.LoadMainScene -= OnLoadMainScene;
-
     }
 
     //Music
-    private void OnResumeButtonWasClicked(object sender, EventArgs e) => PlayLoopingMusic("Bubblegum Pop Hiphop");
-    private void OnPauseButtonWasClicked(object sender, EventArgs e) => PlayLoopingMusic("Low Growl");
+    private void OnVictory(object sender, EventArgs e) => PlayLoopingMusic("Victory - New Age Ghost");
+    private void OnTimeOutGameOver(object sender, EventArgs e) => PlayLoopingMusic("GameOver - Morning Grind");
+    private void OnResumeButtonWasClicked(object sender, EventArgs e) => PlayLoopingMusic("Gameplay - Bubblegum Pop Hiphop");
+    private void OnRestartGame(object sender, EventArgs e) => PlayLoopingMusic("Gameplay - Bubblegum Pop Hiphop");
+    private void OnPauseButtonWasClicked(object sender, EventArgs e) => PlayLoopingMusic("Pause - Low Growl");
 
     //Sound Effects
-    private void OnLoadMainScene(object sender, EventArgs e) => PlayLoopingMusic("Bubblegum Pop Hiphop");
+    private void OnLoadMainScene(object sender, EventArgs e) => PlayLoopingMusic("Gameplay - Bubblegum Pop Hiphop");
     private void OnSpinCamera(object sender, EventArgs e) => PlayAudio("CameraSpin");
     private void OnButtonWasClicked(object sender, EventArgs e) => PlayAudio("ButtonClicked");
     private void OnClickedOnAFreeTile(object sender, Tile e) => PlayAudio("FreeTile");
@@ -70,7 +80,6 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
         catch (Exception e)
         {
         }
-
         sourceToUse.Play();
     }
 
@@ -79,8 +88,7 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
         if (audioSourcePlayingLoopingMusic == null)
         {
             audioSourcePlayingLoopingMusic = GetAudioSourceFromPool();
-        }
-        
+        }        
 
         try
         {
@@ -90,6 +98,7 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
         {
         }
         audioSourcePlayingLoopingMusic.loop = true;
+        audioSourcePlayingLoopingMusic.volume = musicVolume;
         audioSourcePlayingLoopingMusic.Play();
     }
 
