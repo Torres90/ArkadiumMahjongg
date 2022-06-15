@@ -346,6 +346,7 @@ GameObject:
   - component: {fileID: 108769113}
   - component: {fileID: 108769112}
   - component: {fileID: 108769111}
+  - component: {fileID: 108769114}
   m_Layer: 5
   m_Name: Canvas - Pause
   m_TagString: Untagged
@@ -435,6 +436,18 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &108769114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 108769109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f119db9555e22504193754bee88e3eed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &144423754
 GameObject:
   m_ObjectHideFlags: 0
@@ -470,7 +483,7 @@ Transform:
   - {fileID: 1740103924}
   - {fileID: 1825512896}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &379213751
 GameObject:
@@ -830,8 +843,9 @@ GameObject:
   - component: {fileID: 565431375}
   - component: {fileID: 565431374}
   - component: {fileID: 565431373}
+  - component: {fileID: 565431377}
   m_Layer: 5
-  m_Name: GameOver Canvas
+  m_Name: Canvas - GameOver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -920,6 +934,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &565431377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 565431372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f119db9555e22504193754bee88e3eed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &587195743
 GameObject:
   m_ObjectHideFlags: 0
@@ -1067,6 +1093,7 @@ GameObject:
   - component: {fileID: 603154586}
   - component: {fileID: 603154585}
   - component: {fileID: 603154584}
+  - component: {fileID: 603154588}
   m_Layer: 5
   m_Name: Canvas - In Game
   m_TagString: Untagged
@@ -1160,6 +1187,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &603154588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 603154583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f119db9555e22504193754bee88e3eed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &618007590
 GameObject:
   m_ObjectHideFlags: 0
@@ -2449,10 +2488,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acaf38ff5f137bf4fbaca08011c5e41f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameplayCanvas: {fileID: 603154586}
-  gamePausedCanvas: {fileID: 108769113}
-  gameOverCanvas: {fileID: 565431375}
-  gameWonCanvas: {fileID: 1318339440}
   gameDurationInSeconds: 300
   multiplierSecondsLimit: 3
 --- !u!1 &1244199837
@@ -2616,8 +2651,9 @@ GameObject:
   - component: {fileID: 1318339440}
   - component: {fileID: 1318339439}
   - component: {fileID: 1318339438}
+  - component: {fileID: 1318339441}
   m_Layer: 5
-  m_Name: Victory Canvas
+  m_Name: Canvas - Victory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2707,6 +2743,18 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1318339441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1318339436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f119db9555e22504193754bee88e3eed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1360472396
 GameObject:
   m_ObjectHideFlags: 0
@@ -2722,7 +2770,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1360472397
 Transform:
   m_ObjectHideFlags: 0
@@ -2740,7 +2788,7 @@ Transform:
   - {fileID: 1318339437}
   - {fileID: 108769110}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1614896521
 GameObject:

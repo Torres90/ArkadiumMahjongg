@@ -1,7 +1,10 @@
+using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class StartGameButton : MonoBehaviour
 {
-    public void StartGame() => SceneManager.LoadScene(1, LoadSceneMode.Additive); //Scene 1 is the Main Scene
+    public static EventHandler LoadMainScene;
+
+    //public void StartGame() => SceneManager.LoadScene("MainScene", LoadSceneMode.Additive);
+    public void StartGame() => LoadMainScene?.Invoke(this, EventArgs.Empty);
 }

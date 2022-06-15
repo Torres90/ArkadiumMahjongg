@@ -2,16 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(BoxCollider))]
 public class Tile : MonoBehaviour
 {
-    public TileType tileType;
-    public Vector3Int boardPosition;
+    [HideInInspector] public TileType tileType;
+    [HideInInspector] public Vector3Int boardPosition;
 
     [SerializeField] List<Material> tileTypeMaterial; //already in the same order as the enum
     [SerializeField] BoxCollider boxCollider;
     [SerializeField] AnimationCurve animationCurve;
     IEnumerator spinAndShrink;
-    Renderer[] quadRenderers;
+    Renderer thisRenderer;
 
     private void Start()
     {
@@ -23,20 +24,12 @@ public class Tile : MonoBehaviour
         if (spinAndShrink != null)
             StopCoroutine(spinAndShrink);
 
-        if (quadRenderers == null || quadRenderers.Length == 0)
-        {
-            quadRenderers = new Renderer[6];
-            for (int i = 0; i < 6; i++)
-            {
-                quadRenderers[i] = transform.GetChild(i).GetComponent<Renderer>();
-            }
-        }
+        if (thisRenderer == null)
+            thisRenderer = GetComponent<Renderer>();
 
         tileType = type;
-        for (int i = 0; i < quadRenderers.Length; i++)
-        {
-            quadRenderers[i].material = tileTypeMaterial[(int)type];
-        }
+        thisRenderer.material = tileTypeMaterial[(int)type];
+
         boxCollider.enabled = true;
         transform.localScale = Vector3.one;
         transform.rotation = Quaternion.identity;
@@ -51,7 +44,6 @@ public class Tile : MonoBehaviour
         StopCoroutine(spinAndShrink);
         spinAndShrink = SpinAndShrink();
         StartCoroutine(spinAndShrink);
-        //Debug.Log($"Self Disabling from {this.name}");
     }
 
     IEnumerator SpinAndShrink()

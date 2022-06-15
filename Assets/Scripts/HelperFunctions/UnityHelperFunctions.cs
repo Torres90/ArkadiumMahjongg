@@ -45,6 +45,11 @@ namespace CustomHelperFunctions
             }
             return tempList;
         }
+
+        public static void CombineChildMeshes(Transform parentObject)
+        {
+
+        }
     }
 
     [DisallowMultipleComponent]

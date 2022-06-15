@@ -7,15 +7,16 @@ public class GameManager : MonoBehaviour
     //Events
     public static EventHandler<(Tile, Tile)> PlayerFoundTilePair;
     public static EventHandler<int> TimeLeftChanged;
+    public static EventHandler<string> SwitchCanvas;
     public static EventHandler<int> ScoreChanged;
     public static EventHandler<int> MultiplierChanged;
     public static EventHandler TimeOutGameOver;
 
-    [Header("UI Variables")]
-    [SerializeField] private Canvas gameplayCanvas;
-    [SerializeField] private Canvas gamePausedCanvas;
-    [SerializeField] private Canvas gameOverCanvas;
-    [SerializeField] private Canvas gameWonCanvas;
+    //[Header("UI Variables")]
+    //[SerializeField] private Canvas gameplayCanvas;
+    //[SerializeField] private Canvas gamePausedCanvas;
+    //[SerializeField] private Canvas gameOverCanvas;
+    //[SerializeField] private Canvas gameWonCanvas;
 
     [Header("Gameplay Variables")]
     [SerializeField] private int gameDurationInSeconds;
@@ -35,6 +36,7 @@ public class GameManager : MonoBehaviour
         //Subscribing to Events
         Board.ClickedOnAFreeTile += OnClickedOnFreeTile;
         Board.BoardCleared += OnBoardCleared;
+        Board.BoardInitialized += OnBoardInitialized;
         PauseButton.PauseButtonWasPressed += OnPause;
         ResumeButton.ResumeButtonWasPressed += OnResume;
         RestartGameButton.RestartGameButtonPressed += RestartGame;
@@ -44,10 +46,17 @@ public class GameManager : MonoBehaviour
         //Unsubscribing to Events
         Board.ClickedOnAFreeTile -= OnClickedOnFreeTile;
         Board.BoardCleared -= OnBoardCleared;
+        Board.BoardInitialized += OnBoardInitialized;
         PauseButton.PauseButtonWasPressed -= OnPause;
         ResumeButton.ResumeButtonWasPressed -= OnResume;
         RestartGameButton.RestartGameButtonPressed -= RestartGame;
     }
+
+    private void OnBoardInitialized(object sender, EventArgs e)
+    {
+        StartGameTimer();
+    }
+
     private void Start()
     {
         SetupGame();
@@ -57,12 +66,13 @@ public class GameManager : MonoBehaviour
 
     private void SetupGame()
     {
-        //Turning on Main Canvas
-        gameplayCanvas.enabled = true;
-        //Making sure the other ones are off.
-        gameOverCanvas.enabled = false;
-        gamePausedCanvas.enabled = false;
-        gameWonCanvas.enabled = false;
+        ////Turning on Main Canvas
+        //gameplayCanvas.enabled = true;
+        ////Making sure the other ones are off.
+        //gameOverCanvas.enabled = false;
+        //gamePausedCanvas.enabled = false;
+        //gameWonCanvas.enabled = false;
+        SwitchCanvas?.Invoke(this, "Canvas - In Game");
 
         score = 0;
         multiplier = 1;
@@ -71,8 +81,11 @@ public class GameManager : MonoBehaviour
 
         lastSelectedTile = null;
         timeLeft = gameDurationInSeconds;
-        TimeLeftChanged?.Invoke(this, timeLeft);
+        TimeLeftChanged?.Invoke(this, timeLeft);        
+    }
 
+    private void StartGameTimer()
+    {
         if (countdownTimer != null)
         {
             StopCoroutine(countdownTimer);
@@ -88,31 +101,42 @@ public class GameManager : MonoBehaviour
         StopCoroutine(countdownTimer);
         countdownTimer = CountdownTimer();
         StartCoroutine(countdownTimer);
-        //Turn on other panels
-        gameplayCanvas.enabled = true;
-        //Turn off Pause canvas
-        gamePausedCanvas.enabled = false;
+
+        ////Turn on other panels
+        //gameplayCanvas.enabled = true;
+        ////Turn off Pause canvas
+        //gamePausedCanvas.enabled = false;
+        SwitchCanvas?.Invoke(this, "Canvas - In Game");
+
     }
     private void OnPause(object sender, EventArgs e)
     {
         //Stop Timer
         StopCoroutine(countdownTimer);
-        //Turn on Pause Canvas
-        gamePausedCanvas.enabled = true;
-        //Turn off other panels
-        gameplayCanvas.enabled = false;
+
+        ////Turn on Pause Canvas
+        //gamePausedCanvas.enabled = true;
+        ////Turn off other panels
+        //gameplayCanvas.enabled = false;
+        SwitchCanvas?.Invoke(this, "Canvas - Pause");
+
     }
     private void OnBoardCleared(object sender, EventArgs e) => GameOver(victory: true);
     private void GameOver(bool victory)
     {
-        gameplayCanvas.enabled = false;
+        //gameplayCanvas.enabled = false;
+        SwitchCanvas?.Invoke(this, "none");
+
         if (victory)
         {
-            gameWonCanvas.enabled = true;
+            //gameWonCanvas.enabled = true;
+            SwitchCanvas?.Invoke(this, "Canvas - Victory");
+
         }
         else
         {
-            gameOverCanvas.enabled = true;
+            //gameOverCanvas.enabled = true;
+            SwitchCanvas?.Invoke(this, "Canvas - GameOver");
         }
     }
     private void OnClickedOnFreeTile(object sender, Tile clickedTile)

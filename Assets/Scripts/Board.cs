@@ -8,10 +8,11 @@ public class Board : MonoBehaviour
     public static EventHandler<Tile> ClickedOnAFreeTile;
     public static EventHandler ClickedOnAStuckTile;
     public static EventHandler BoardCleared;
+    public static EventHandler BoardInitialized;
 
     [SerializeField] private Vector3Int boardSize;
     [SerializeField] private float gapBetweenCubes;
-    [SerializeField] private TileSpawner tileSpawner;
+    private TileSpawner tileSpawner;
     private List<Tile> tileList;
 
     private void OnEnable()
@@ -28,8 +29,8 @@ public class Board : MonoBehaviour
     }
     void Start()
     {
-        if (tileSpawner == null)
-            Debug.LogError("'tileSpawner' was not set in the inspector");
+        tileSpawner = FindObjectOfType<TileSpawner>();
+        if (tileSpawner == null) Debug.LogError("TileSpawner not found.");
 
         InitializeBoard();
     }
@@ -68,6 +69,7 @@ public class Board : MonoBehaviour
             Debug.LogError("There's an uneven number of leftover tiles.");
 
         tileList = CreateNewBoardFromPool(boardSize, tileRepetitions, leftOverTiles);
+        BoardInitialized?.Invoke(this, EventArgs.Empty);
     }
 
     private List<Tile> CreateNewBoardFromPool(Vector3 boardSize, int tileRepetitions, int extraTiles)

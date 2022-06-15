@@ -233,9 +233,54 @@ Transform:
   - {fileID: 618007591}
   - {fileID: 1740103924}
   - {fileID: 1825512896}
+  - {fileID: 323147864}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &323147863
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 323147864}
+  - component: {fileID: 323147865}
+  m_Layer: 0
+  m_Name: SceneLoader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &323147864
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 323147863}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 144423755}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &323147865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 323147863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51e3d334ae71b664b86a33a7780b29b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &379213751
 GameObject:
   m_ObjectHideFlags: 0
@@ -356,7 +401,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0189b6b23d1365542b7698f8dc513bd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  genericTilePrefab: {fileID: 4768530938895972433, guid: dbd2bba7bf652604bafaf672633f85c7, type: 3}
+  genericTilePrefab: {fileID: 6822529952383465900, guid: 4493c3beb33695144a9e9010a3fffdd8, type: 3}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -579,10 +624,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acaf38ff5f137bf4fbaca08011c5e41f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameplayCanvas: {fileID: 0}
-  gamePausedCanvas: {fileID: 0}
-  gameOverCanvas: {fileID: 0}
-  gameWonCanvas: {fileID: 0}
   gameDurationInSeconds: 300
   multiplierSecondsLimit: 3
 --- !u!1 &1740103923
@@ -760,5 +801,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7356827207086727235, guid: 17e6274dccd946241bcd5477b26cb288, type: 3}
+      propertyPath: audioClipsList.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7356827207086727235, guid: 17e6274dccd946241bcd5477b26cb288, type: 3}
+      propertyPath: audioClipsList.Array.data[5]
+      value: 
+      objectReference: {fileID: 8300000, guid: 8756dc89ffa5ff64c9d4ff311341d868, type: 3}
+    - target: {fileID: 7356827207086727235, guid: 17e6274dccd946241bcd5477b26cb288, type: 3}
+      propertyPath: audioClipsList.Array.data[6]
+      value: 
+      objectReference: {fileID: 8300000, guid: 63e07f865801be747927b8e696077119, type: 3}
+    - target: {fileID: 7356827207086727235, guid: 17e6274dccd946241bcd5477b26cb288, type: 3}
+      propertyPath: audioClipsList.Array.data[7]
+      value: 
+      objectReference: {fileID: 8300000, guid: 8b8cf648536512f4ebb6dfb21444a90b, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17e6274dccd946241bcd5477b26cb288, type: 3}

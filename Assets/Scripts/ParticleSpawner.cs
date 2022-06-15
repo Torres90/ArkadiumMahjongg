@@ -12,6 +12,9 @@ public class ParticleSpawner : MonoBehaviour
             createFunc: CreateParticle,
             actionOnGet: OnTakeParticleFromPool,
             actionOnRelease: OnReturnParticleToPool);
+
+        //Prewarm pool
+        PreWarmPool(4);
     }
 
     private void OnEnable()
@@ -55,6 +58,20 @@ public class ParticleSpawner : MonoBehaviour
     }
 
     public ParticleSystem GetParticle() => particlesPool.Get();
+
+    private void PreWarmPool(int prewarmAmount)
+    {
+        ParticleSystem[] preWarmArray = new ParticleSystem[prewarmAmount];
+        for (int i = 0; i < prewarmAmount; i++)
+        {
+            ParticleSystem newParticleSystem = particlesPool.Get();
+            preWarmArray[i] = newParticleSystem;
+        }
+        for (int i = 0; i < preWarmArray.Length; i++)
+        {
+            particlesPool.Release(preWarmArray[i]);
+        }
+    }
 
 }
 
