@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
-    //[SerializeField] private string startupScene;
+    public GameObject LoadingCanvas;
 
     private void OnEnable()
     {
@@ -20,31 +20,42 @@ public class SceneLoader : MonoBehaviour
     private void OnLoadMainScene(object sender, EventArgs e)
     {
         SceneManager.UnloadSceneAsync("IntroScene");
-        SceneManager.LoadScene("MainScene", LoadSceneMode.Additive);
-        Debug.Log($"Active scene is {SceneManager.GetActiveScene().name}");
+
+        StartCoroutine(WaitForLoadSceneAsync("MainScene"));
+
+        //SceneManager.LoadScene("MainScene", LoadSceneMode.Additive);
+        //Debug.Log($"Active scene is {SceneManager.GetActiveScene().name}");
 
     }
 
     void Start()
     {
-        //if (Application.isEditor)
-        //{
-        //    Scene loadedLevel = SceneManager.GetSceneByName("Level 1");
-        //    if (loadedLevel.isLoaded)
-        //    {
-        //        SceneManager.SetActiveScene(loadedLevel);
-        //        return;
-        //    }
-        //}
 
         //Only load intro scene at start if the Base Scene is the active scene.
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneAt(0))
         {
-            SceneManager.LoadScene("IntroScene", LoadSceneMode.Additive);
+            StartCoroutine(WaitForLoadSceneAsync("IntroScene"));
+            //SceneManager.LoadScene("IntroScene", LoadSceneMode.Additive);
             //SceneManager.SetActiveScene(SceneManager.GetSceneByName("IntroScene"));
             Debug.Log($"Active scene is {SceneManager.GetActiveScene().name}");
         }
 
     }
 
+    IEnumerator WaitForLoadSceneAsync(string sceneName)
+    {
+        LoadingCanvas.SetActive(true);
+        LoadingCanvas.GetComponent<Canvas>().sortingOrder = 100;
+        // The Application loads the Scene in the background as the current Scene runs.
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+
+        //yield return new WaitForSeconds(3); //Debug only
+
+        // Wait until the asynchronous scene fully loads
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+        LoadingCanvas.SetActive(false);
+    }
 }
