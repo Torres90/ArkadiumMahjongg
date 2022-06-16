@@ -1,3 +1,0 @@
---Scene Loading--
-Base Scene has all the logic shared by all other scenes. 
-It loads the Intro Scene automatically.

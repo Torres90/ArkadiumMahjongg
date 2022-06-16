@@ -3,14 +3,13 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public class AudioManager : SingletonMonoBehaviour<AudioManager>
+public class AudioManager : MonoBehaviour
 {
     [SerializeField] List<AudioClip> audioClipsList;
     List<AudioSource> audioSourcePool;
     readonly int audioSourcePoolPreloadAmout = 5;
     AudioSource audioSourcePlayingLoopingMusic;
-    [Range(0,1)]
+    [Range(0, 1)]
     [SerializeField] float musicVolume;
 
     private void Start()
@@ -67,19 +66,12 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
     private void OnButtonWasClicked(object sender, EventArgs e) => PlayAudio("ButtonClicked");
     private void OnClickedOnAFreeTile(object sender, Tile e) => PlayAudio("FreeTile");
     private void OnClickedOnAStuckTile(object sender, EventArgs e) => PlayAudio("StuckTile");
-    private void OnPlayerFoundTilePair(object sender, (Tile, Tile) e) => PlayAudio("FoundTilePair");
+    private void OnPlayerFoundTilePair(object sender, (Tile, Tile) e) => PlayAudio("FoundTilePair_V2");
 
     private void PlayAudio(string clipToPlay)
     {
         AudioSource sourceToUse = GetAudioSourceFromPool();
-
-        try
-        {
-            sourceToUse.clip = audioClipsList.Find(_ => _.name == clipToPlay);
-        }
-        catch (Exception e)
-        {
-        }
+        sourceToUse.clip = audioClipsList.Find(_ => _.name == clipToPlay);
         sourceToUse.Play();
     }
 
@@ -88,20 +80,12 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
         if (audioSourcePlayingLoopingMusic == null)
         {
             audioSourcePlayingLoopingMusic = GetAudioSourceFromPool();
-        }        
-
-        try
-        {
-            audioSourcePlayingLoopingMusic.clip = audioClipsList.Find(_ => _.name == clipToPlay);
         }
-        catch (Exception e)
-        {
-        }
+        audioSourcePlayingLoopingMusic.clip = audioClipsList.Find(_ => _.name == clipToPlay);
         audioSourcePlayingLoopingMusic.loop = true;
         audioSourcePlayingLoopingMusic.volume = musicVolume;
         audioSourcePlayingLoopingMusic.Play();
     }
-
 
     private void InitializeAudioSourcePool()
     {
@@ -116,9 +100,7 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
         for (int i = 0; i < audioSourcePool.Count; i++)
         {
             if (audioSourcePool[i].isPlaying == false)
-            {
                 return audioSourcePool[i];
-            }
         }
 
         //All audio sources are busy, we must create a new one
